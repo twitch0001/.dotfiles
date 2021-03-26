@@ -36,8 +36,6 @@ set bg=dark
 " Ale 
 let g:ale_warn_about_trialing_whitespace = 0
 
-noremap <F2> :Fern . -drawer -width=40<CR>
-
 " QOL stuff
 filetype plugin indent on
 set tabstop=4
