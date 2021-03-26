@@ -1,10 +1,14 @@
 call plug#begin()
- " Misc
- Plug 'scrooloose/nerdtree'
- Plug 'tpope/vim-fugitive'
- Plug 'hugolgst/vimsence'
+ " File tree
+ Plug 'preservim/nerdtree' 
 
- " Syntax highlighting.
+ " LSP 
+ Plug 'dense-analysis/ale'   
+
+ " Git stuff
+ Plug 'tpope/vim-fugitive'
+
+ " Syntax highlighting
  Plug 'Glench/Vim-Jinja2-Syntax'
  Plug 'elixir-lang/vim-elixir'
 
@@ -16,11 +20,12 @@ call plug#begin()
  Plug 'morhetz/gruvbox'
 call plug#end()
 
-" Nerdtree configs
-autocmd vimenter * NERDTree
-autocmd StdinReadPre * let s:std_in=1
-autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
-let g:NERDTreeWinSize = 18
+
+" Nerdtree configs - decide whether to switch to Fern
+ autocmd vimenter * NERDTree
+ autocmd StdinReadPre * let s:std_in=1
+ autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
+ let g:NERDTreeWinSize = 18
 
 " Theme
 let g:airline_theme='gruvbox'
@@ -28,18 +33,29 @@ let g:airline#extensions#tabline#enabled = 1
 autocmd vimenter * colorscheme gruvbox
 set bg=dark
 
-" QOL Stuff
+" Ale 
+let g:ale_warn_about_trialing_whitespace = 0
+
+noremap <F2> :Fern . -drawer -width=40<CR>
+
+" QOL stuff
 filetype plugin indent on
 set tabstop=4
 set shiftwidth=4
 set expandtab
 set number
+set hlsearch
+set showmatch 
+set ignorecase
 
-" Keybindings to change between buffers in split mode
+" Keymappings
+
+" Change between buffers in split mode
 nmap <C-j> :wincmd k<CR>
 nmap <C-k> :wincmd j<CR>
 nmap <C-h> :wincmd h<CR>
 nmap <C-l> :wincmd l<CR>
 
-" Highlight all search matches
-set hlsearch
+" Clear highlights
+noremap <F3> :noh <CR> 
+
